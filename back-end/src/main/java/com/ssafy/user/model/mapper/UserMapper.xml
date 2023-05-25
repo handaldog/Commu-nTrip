@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.user.model.mapper.UserMapper">
+
+	<select id="searchOne"
+		parameterType="com.ssafy.user.model.dto.UserDto"
+		resultType="com.ssafy.user.model.dto.UserDto">
+
+		SELECT ID, NAME, AGE, LOCAL, TYPE
+		FROM USER
+		WHERE ID= #{id} AND PW
+		= #{pw}
+
+	</select>
+
+	<insert id="insert"
+		parameterType="com.ssafy.user.model.dto.UserDto">
+		INSERT INTO USER VALUES(#{id},
+		#{pw}, #{name}, #{age}, #{local}, null, #{type})
+	</insert>
+
+	<delete id="delete" parameterType="String">
+
+		DELETE FROM USER WHERE ID =
+		#{id}
+	</delete>
+
+	<update id="modify"
+		parameterType="com.ssafy.user.model.dto.UserDto" >
+
+		UPDATE USER SET NAME = #{name} , AGE =
+		#{age} , LOCAL = #{local}
+		WHERE ID = #{id}
+	</update>
+	
+	<select id="checkId" parameterType="string" resultType="int">
+		select count(id) 
+		from user 
+		where id = #{id}
+	</select>
+	
+	<update id="registType" parameterType="com.ssafy.user.model.dto.UserDto">
+		update user set type=#{type}
+		where id = #{id}
+	</update>
+	
+	<select id="selectType" parameterType="String" resultType="com.ssafy.user.model.dto.PreferDto">
+		SELECT TYPENAME, IMAGE, TITLE, ADDR1, LATITUDE, LONGITUDE
+		FROM PREFERTYPE
+		WHERE TYPENAME = #{type}
+	</select>
+	
+	<select id="userInfo" parameterType="string" resultType="com.ssafy.user.model.dto.UserDto">
+		select id, name, age, local, type
+		from user
+		where id = #{userid}
+	</select>
+	
+	<select id="getRefreshToken" parameterType="string" resultType="string">
+		select token
+		from user
+		where id = #{userid}
+	</select>
+	
+	<update id="saveRefreshToken" parameterType="map">
+		update user
+		set token = #{token}
+		where id = #{userid}
+	</update>
+	
+	<update id="deleteRefreshToken" parameterType="map">
+		update user
+		set token = #{token, jdbcType=VARCHAR}
+		where id = #{userid}
+	</update>
+</mapper>

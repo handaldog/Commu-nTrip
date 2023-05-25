@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.board.model.mapper.CommentMapper">
+	<select id="commentlist" resultType="com.ssafy.board.model.dto.CommentDto">
+		SELECT CNO, BNO, ID, CONTENT, REGIST_TIME
+		FROM COMMENT
+		WHERE BNO = #{bno}
+	</select>
+	
+	<insert id="insert" parameterType="com.ssafy.board.model.dto.CommentDto">
+		INSERT INTO COMMENT(BNO, ID, CONTENT, REGIST_TIME) 
+		VALUES(#{bno}, #{id}, #{content}, NOW())
+	</insert>
+	
+	<update id="modify" parameterType="com.ssafy.board.model.dto.CommentDto">
+		update comment set content=#{content}, regist_time=now() where cno = #{cno}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+		delete from comment where cno = #{cno}
+	</delete>
+</mapper>
