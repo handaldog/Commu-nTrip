@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.trip.model.mapper.DetailCommentMapper">
+	<select id="commentlist" resultType="com.ssafy.trip.model.dto.DetailCommentDto">
+		SELECT DNO, CONTENT_ID, ID, CONTENT, REGISTERTIME
+		FROM DETAILCOMMENT
+		WHERE content_id = #{content_id}
+		order by dno desc
+		limit 0, 5
+	</select>
+	
+	<insert id="insert" parameterType="com.ssafy.trip.model.dto.DetailCommentDto">
+		INSERT INTO DETAILCOMMENT(CONTENT_ID, ID, CONTENT, REGISTERTIME) 
+		VALUES(#{content_id}, #{id}, #{content}, NOW())
+	</insert>
+	
+	<update id="modify" parameterType="com.ssafy.trip.model.dto.DetailCommentDto">
+		update DETAILCOMMENT set content=#{content}, regist_time=now() where dno = #{dno}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+		delete from DETAILCOMMENT where dno = #{dno}
+	</delete>
+
+</mapper>

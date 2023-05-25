@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.trip.model.mapper.TripMapper">
+
+	<select id="list"
+		parameterType="com.ssafy.trip.model.dto.TripDto"
+		resultType="com.ssafy.trip.model.dto.TripDto">
+
+		SELECT CONTENT_ID, CONTENT_TYPE_ID, TITLE, SIDO_CODE, FIRST_IMAGE, ADDR1,JNO
+		FROM ATTRACTION_INFO left join jjim
+		using(content_id)
+		WHERE CONTENT_TYPE_ID = #{content_type_id} AND SIDO_CODE =
+		#{sido_code} AND TITLE LIKE '%${title}%' AND FIRST_IMAGE != ""
+
+	</select>
+
+	<select id="detail" parameterType="int"
+		resultType="com.ssafy.trip.model.dto.TripDto">
+
+		SELECT LATITUDE, LONGITUDE, TITLE, FIRST_IMAGE, ADDR1
+		FROM ATTRACTION_INFO
+		WHERE CONTENT_ID = #{content_id}
+	</select>
+
+	<select id="preferworddetail" parameterType="String" resultType="int">
+		SELECT CONTENT_ID
+		FROM ATTRACTION_INFO
+		WHERE TITLE = #{TITLE}
+	</select>
+
+	<update id="updateHit" parameterType="int">
+		UPDATE ATTRACTION_INFO
+		SET
+		HIT = HIT + 1
+		WHERE CONTENT_ID = #{content_id}
+	</update>
+
+	<select id="topCardList"
+		resultType="com.ssafy.trip.model.dto.TripDto">
+		SELECT CONTENT_ID, CONTENT_TYPE_ID, TITLE, SIDO_CODE,
+		FIRST_IMAGE, ADDR1, HIT
+		FROM ATTRACTION_INFO
+		WHERE FIRST_IMAGE != ''
+		ORDER BY HIT DESC
+		LIMIT 0, 5;
+	</select>
+
+</mapper>

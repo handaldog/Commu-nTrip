@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.board.model.mapper.BoardMapper">
+	<insert id="insert" parameterType="com.ssafy.board.model.dto.BoardDto">
+		INSERT INTO BOARD (writer, subject, content, registerTime, boardType, tradeState, tradeName, tradePrice, totalPerson, personnelCount)
+		VALUES (#{writer}, #{subject}, #{content}, NOW(), #{boardType}, #{tradeState}, #{tradeName}, #{tradePrice}, #{totalPerson}, #{personnelCount})
+	</insert>
+	
+	<select id="list" parameterType="Map" resultType="com.ssafy.board.model.dto.BoardDto">
+		SELECT bno, writer, subject, content, registerTime, boardType, tradeState, totalPerson, personnelCount
+		FROM board
+		where boardType = '${boardType}'
+		<if test="!key.isEmpty() and !word.isEmpty()">
+			<if test='key.equals("제목")'>
+				and subject like '%${word}%'
+			</if>
+			<if test='key.equals("내용")'>
+				and content like '%${word}%'
+			</if>
+			<if test='key.equals("작성자")'>
+				and writer like '%${word}%'
+			</if>
+		</if>
+		ORDER BY BNO DESC
+	</select>
+	
+	<select id="getTotalCount" parameterType="Map">
+		SELECT COUNT(BNO)
+		FROM BOARD
+		<if test="!key.isEmpty() and !word.isEmpty()">
+			<if test='key.equals("제목")'>
+				where subject like '%${word}%'
+			</if>
+			<if test='key.equals("내용")'>
+				where content like '%${word}%'
+			</if>
+			<if test='key.equals("작성자")'>
+				where writer like '%${word}%'
+			</if>
+		</if>
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="com.ssafy.board.model.dto.BoardDto">
+		SELECT bno, writer, subject ,content, registerTime, boardType,tradeState, tradeName, tradePrice, totalPerson, personnelCount
+		FROM board WHERE bno=#{bno}
+	</select>
+	
+	<update id="modify" parameterType="com.ssafy.board.model.dto.BoardDto">
+		UPDATE board 
+		SET writer=#{writer}, subject=#{subject}, content=#{content}, registerTime=now(), tradeName=#{tradeName}, tradePrice=#{tradePrice}, totalPerson=#{totalPerson}
+		WHERE bno=#{bno}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE from board where bno=#{bno}
+	</delete>
+	
+	<insert id="insertAlert" parameterType="com.ssafy.board.model.dto.AlertDto">
+		insert into tradealert (bno, writer, id, content, registerTime, type) 
+		values(#{bno}, #{writer}, #{id}, #{content}, now(), #{type});
+	</insert>
+	
+	<delete id="deleteAlert" parameterType="int">
+		delete from tradealert where tno = #{tno}
+	</delete>
+	
+	<select id="AlertTradeList" parameterType="string" resultType="com.ssafy.board.model.dto.AlertDto">
+		select tno, bno, writer, id, content, registerTime 
+		from tradealert 
+		where writer = #{writer} and type = 2
+	</select>
+	
+	<select id="AlertTogetList" parameterType="string" resultType="com.ssafy.board.model.dto.AlertDto">
+		select tno, bno, writer, id, content, registerTime 
+		from tradealert 
+		where writer = #{writer} and type = 3
+	</select>
+	
+	<update id="updatePersonCount">
+		update board set personnelCount = personnelCount + 1 where bno=#{bno};
+	</update>
+	
+	<update id="updateTradeState">
+		update board set tradeState = '거래 완료' where bno=#{bno};
+	</update>
+</mapper>

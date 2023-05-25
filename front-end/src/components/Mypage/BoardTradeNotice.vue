@@ -17,7 +17,7 @@
               :icon="['fas', 'check']"
               style="color: #26f72a"
               size="lg"
-              @click="acceptAlert(data.item.bno)"
+              @click="acceptAlert(data.item.bno), deleteAlert(data.item.tno)"
             />
           </template>
           <template #cell(delete)="data">
