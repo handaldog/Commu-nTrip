@@ -59,7 +59,11 @@ export default {
         this.user.type = this.imglist[c].src1;
         axios.put('http://localhost/user/type', this.user).then((resp) => {
           console.log(resp.data);
-          this.updateUser();
+          if (this.isLogin) {
+            this.updateUser();
+          } else {
+            this.$router.push({ name: 'main' });
+          }
         });
       }
     },

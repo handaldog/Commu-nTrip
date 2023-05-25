@@ -1,7 +1,5 @@
 <template>
   <div row row-col-lg-4 row-col-md-6>
-    <button class="border recom rounded" @click="movetypeselect">맞춤 여행 카드 정하러 가기</button>
-
     <b-card-group deck style="justify-content: center">
       <!-- 카드 -->
       <b-card
@@ -24,34 +22,36 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+const userStore = "userStore";
 export default {
   components: {},
   data() {
     return {
       notypepreferlists: [
         {
-          image: '@/assets/물음표.jpg',
+          image: "@/assets/물음표.jpg",
         },
         {
-          image: '@/assets/물음표.jpg',
+          image: "@/assets/물음표.jpg",
         },
         {
-          image: '@/assets/물음표.jpg',
+          image: "@/assets/물음표.jpg",
         },
         {
-          image: '@/assets/물음표.jpg',
+          image: "@/assets/물음표.jpg",
         },
         {
-          image: '@/assets/물음표.jpg',
+          image: "@/assets/물음표.jpg",
         },
       ],
     };
   },
 
-  methods: {
-    movetypeselect() {
-      this.$router.push({ name: 'login' });
-    },
+  methods: {},
+
+  computed: {
+    ...mapState(userStore, ["userInfo"]),
   },
 };
 </script>

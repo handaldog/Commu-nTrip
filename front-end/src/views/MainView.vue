@@ -60,6 +60,7 @@
     <br />
     <div v-if="this.isLogin">
       <div v-if="this.userInfo.type == 'notype'">
+        <button class="border recom rounded" @click="movetypeselect">맞춤 타입 정하러 가기</button>
         <notype-prefer-card></notype-prefer-card>
         <h1>타입 결정하러 가세요!!</h1>
       </div>
@@ -68,38 +69,56 @@
       </div>
     </div>
     <div v-else>
+      <button class="border recom rounded" @click="movetypelogin">로그인 하기</button>
       <notype-prefer-card></notype-prefer-card>
-
       <h1>로그인을 하시면 맞춤 카드를 볼 수 있어요!</h1>
     </div>
   </div>
 </template>
 
 <script>
-import MainCard from '@/components/card/MainCard.vue';
-import SearchTrip from '@/components/Search/SearchTrip.vue';
-import PrefertypeCard from '../components/card/PrefertypeCard.vue';
-import { mapState } from 'vuex';
-import NotypePreferCard from '@/components/card/NotypePreferCard.vue';
+import MainCard from "@/components/card/MainCard.vue";
+import SearchTrip from "@/components/Search/SearchTrip.vue";
+import PrefertypeCard from "../components/card/PrefertypeCard.vue";
+import { mapState } from "vuex";
+import NotypePreferCard from "@/components/card/NotypePreferCard.vue";
 
-const userStore = 'userStore';
+const userStore = "userStore";
 export default {
   components: { MainCard, SearchTrip, PrefertypeCard, NotypePreferCard },
 
   methods: {
     onSlideStart() {},
     onSlideEnd() {},
+
+    movetypelogin() {
+      this.$router.push({ name: "login" });
+    },
+    movetypeselect() {
+      this.$router.push({ name: "prefer" });
+    },
   },
 
   computed: {
-    ...mapState(userStore, ['userInfo', 'isLogin']),
+    ...mapState(userStore, ["userInfo", "isLogin"]),
   },
 };
 </script>
 
 ///////////////////////////
 
-<style>
+<style scoped>
+.recom {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #a5e289;
+  color: white;
+  border-color: #a5e289;
+}
 /* .img-fluid {
   max-width: 100%;
   height: 700px;
