@@ -2,27 +2,14 @@
   <div>
     <b-container class="mt-5">
       <h2>여행 리스트</h2>
-      <b-table
-        striped
-        hover
-        :fields="fields"
-        :items="triplist"
-        @row-clicked="tripArticle"
-        class="mt-4"
-      >
+      <b-table striped hover :fields="fields" :items="triplist" @row-clicked="tripArticle" class="mt-4">
         <template #cell(first_image)="data">
-          <b-img :src="data.item.first_image" width="100%" height="100%">{{
-            data.item.first_image
-          }}</b-img>
+          <b-img :src="data.item.first_image" width="100%" height="100%">{{ data.item.first_image }}</b-img>
         </template>
 
         <!-- true -->
         <template #cell(jjim)="data">
-          <div
-            v-if="data.item.jno"
-            @click.stop
-            class="h-100 d-flex align-items-center justify-content-center"
-          >
+          <div v-if="data.item.jno" @click.stop class="h-100 d-flex align-items-center justify-content-center">
             <font-awesome-icon
               icon="fa-solid fa-heart"
               style="color: #f40b0b"
@@ -71,7 +58,7 @@ export default {
   created() {
     axios
       .get(
-        `http://localhost/trip/list?content_type_id=${this.selected.typeselected}&sido_code=${this.selected.localselected}&title=${this.selected.searchselected}`
+        `http://192.168.214.52/trip/list?content_type_id=${this.selected.typeselected}&sido_code=${this.selected.localselected}&title=${this.selected.searchselected}`
       )
       .then(({ data }) => {
         this.triplist = data;
@@ -95,11 +82,11 @@ export default {
       this.jjimInfo.id = this.userInfo.id;
       console.log(this.jjimInfo.content_id);
       console.log(this.jjimInfo.id);
-      await axios.post('http://localhost/jjim/write', this.jjimInfo);
+      await axios.post('http://192.168.214.52/jjim/write', this.jjimInfo);
 
       await axios
         .get(
-          `http://localhost/trip/list?content_type_id=${this.selected.typeselected}&sido_code=${this.selected.localselected}&title=${this.selected.searchselected}`
+          `http://192.168.214.52/trip/list?content_type_id=${this.selected.typeselected}&sido_code=${this.selected.localselected}&title=${this.selected.searchselected}`
         )
         .then(({ data }) => {
           this.triplist = data;
@@ -107,11 +94,11 @@ export default {
     },
 
     async jjimDelete(jno) {
-      await axios.delete('http://localhost/jjim/' + jno);
+      await axios.delete('http://192.168.214.52/jjim/' + jno);
 
       await axios
         .get(
-          `http://localhost/trip/list?content_type_id=${this.selected.typeselected}&sido_code=${this.selected.localselected}&title=${this.selected.searchselected}`
+          `http://192.168.214.52/trip/list?content_type_id=${this.selected.typeselected}&sido_code=${this.selected.localselected}&title=${this.selected.searchselected}`
         )
         .then(({ data }) => {
           this.triplist = data;

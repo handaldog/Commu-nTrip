@@ -71,13 +71,13 @@ export default {
     };
   },
   created() {
-    axios.get(`http://localhost/board?boardType=1&key=${this.key}&word=${this.word}`).then((resp) => {
+    axios.get(`http://192.168.214.52/board?boardType=1&key=${this.key}&word=${this.word}`).then((resp) => {
       this.items = resp.data;
     });
   },
   methods: {
     boardSearch() {
-      axios.get(`http://localhost/board?boardType=1&key=${this.key}&word=${this.word}`).then((resp) => {
+      axios.get(`http://192.168.214.52/board?boardType=1&key=${this.key}&word=${this.word}`).then((resp) => {
         this.items = resp.data;
       });
     },

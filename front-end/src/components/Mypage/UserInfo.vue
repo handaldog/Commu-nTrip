@@ -75,36 +75,36 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
-const userStore = "userStore";
+const userStore = 'userStore';
 
 export default {
   data() {
     return {
-      local: "",
+      local: '',
 
       options: [
-        { value: "서울", text: "서울" },
-        { value: "대전", text: "대전" },
-        { value: "구미", text: "구미" },
-        { value: "광주", text: "광주" },
-        { value: "부울경", text: "부울경" },
+        { value: '서울', text: '서울' },
+        { value: '대전', text: '대전' },
+        { value: '구미', text: '구미' },
+        { value: '광주', text: '광주' },
+        { value: '부울경', text: '부울경' },
       ],
 
       user: {
-        id: "",
-        pw: "",
-        name: "",
-        age: "",
-        local: "",
+        id: '',
+        pw: '',
+        name: '',
+        age: '',
+        local: '',
       },
     };
   },
   computed: {
-    ...mapState(userStore, ["userInfo"]),
+    ...mapState(userStore, ['userInfo']),
   },
 
   created() {
@@ -122,14 +122,14 @@ export default {
       //  const password = prompt('비밀번호를 입력하세요.');
       //  this.user.pw = password;
       axios
-        .put(`http://localhost/user`, this.user)
+        .put(`http://192.168.214.52/user`, this.user)
         .then((response) => {
           console.log(response);
-          alert("수정이 완료되었습니다.");
+          alert('수정이 완료되었습니다.');
         })
         .catch((error) => {
           console.log(error);
-          alert("수정 실패");
+          alert('수정 실패');
         });
     },
   },

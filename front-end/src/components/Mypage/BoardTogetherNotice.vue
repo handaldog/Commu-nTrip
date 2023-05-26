@@ -70,7 +70,7 @@ export default {
   },
   created() {
     console.log(this.userInfo.id);
-    axios.get(`http://localhost/board/alert/toget/${this.userInfo.id}`).then((resp) => {
+    axios.get(`http://192.168.214.52/board/alert/toget/${this.userInfo.id}`).then((resp) => {
       this.items = resp.data;
     });
   },
@@ -78,7 +78,7 @@ export default {
     deleteAlert(tno) {
       console.log('tno', tno);
       axios
-        .delete(`http://localhost/board/alert/${tno}`)
+        .delete(`http://192.168.214.52/board/alert/${tno}`)
         .then(({ data }) => {
           console.log(data);
         })
@@ -89,7 +89,7 @@ export default {
     acceptAlert(bno) {
       console.log('bno', bno);
       axios
-        .put(`http://localhost/board/count/${bno}`)
+        .put(`http://192.168.214.52/board/count/${bno}`)
         .then(({ data }) => {
           console.log(data);
         })

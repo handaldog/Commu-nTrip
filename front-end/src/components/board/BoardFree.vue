@@ -25,12 +25,7 @@
           </router-link>
         </template> -->
       </b-table>
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        aria-controls="my-table"
-      >
+      <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table">
       </b-pagination>
     </template>
     <template v-else>
@@ -78,19 +73,15 @@ export default {
     };
   },
   created() {
-    axios
-      .get(`http://localhost/board?boardType=0&key=${this.key}&word=${this.word}`)
-      .then((resp) => {
-        this.items = resp.data;
-      });
+    axios.get(`http://192.168.214.52/board?boardType=0&key=${this.key}&word=${this.word}`).then((resp) => {
+      this.items = resp.data;
+    });
   },
   methods: {
     boardSearch() {
-      axios
-        .get(`http://localhost/board?boardType=0&key=${this.key}&word=${this.word}`)
-        .then((resp) => {
-          this.items = resp.data;
-        });
+      axios.get(`http://192.168.214.52/board?boardType=0&key=${this.key}&word=${this.word}`).then((resp) => {
+        this.items = resp.data;
+      });
     },
     viewArticle(article) {
       localStorage.setItem('viewbno', article.bno);

@@ -57,7 +57,7 @@ export default {
       if (this.choice > 6) {
         alert(`당신은 ${this.imglist[c].src1}형 입니다.`);
         this.user.type = this.imglist[c].src1;
-        axios.put('http://localhost/user/type', this.user).then((resp) => {
+        axios.put('http://192.168.214.52/user/type', this.user).then((resp) => {
           console.log(resp.data);
           if (this.isLogin) {
             this.updateUser();
@@ -74,7 +74,7 @@ export default {
         alert(`당신은 ${this.imglist[c].src2}형 입니다.`);
         this.user.type = this.imglist[c].src2;
 
-        axios.put('http://localhost/user/type', this.user).then((resp) => {
+        axios.put('http://192.168.214.52/user/type', this.user).then((resp) => {
           console.log(resp.data);
           if (this.isLogin) {
             this.updateUser();

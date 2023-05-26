@@ -40,7 +40,7 @@ export default {
   methods: {
     userdelete() {
       if (confirm('정말로 탈퇴하시겠습니까?')) {
-        axios.delete('http://localhost/user/delete/' + this.userInfo.id).then((resp) => {
+        axios.delete('http://192.168.214.52/user/delete/' + this.userInfo.id).then((resp) => {
           if (resp.data) {
             console.log('탈퇴함.');
             alert('탈퇴되었습니다.');

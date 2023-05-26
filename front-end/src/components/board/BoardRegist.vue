@@ -3,13 +3,7 @@
     <h2>글 작성</h2>
     <b-form>
       <b-form-group id="input-group-1" label="제목 :" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="article.subject"
-          type="text"
-          placeholder="제목"
-          required
-        ></b-form-input>
+        <b-form-input id="input-1" v-model="article.subject" type="text" placeholder="제목" required></b-form-input>
       </b-form-group>
 
       <template v-if="article.boardType == 2">
@@ -56,9 +50,7 @@
         ></b-form-textarea>
       </b-form-group>
     </b-form>
-    <b-button
-      @click="onSubmit"
-      style="background-color: #a5e289; border-color: #a5e289; margin-right: 5px"
+    <b-button @click="onSubmit" style="background-color: #a5e289; border-color: #a5e289; margin-right: 5px"
       >작성</b-button
     >
     <b-button @click="onReset" variant="danger">초기화</b-button>
@@ -106,7 +98,7 @@ export default {
       if (this.article.boardType == 3) {
         this.article.personnelCount = 1;
       }
-      await axios.post('http://localhost/board', this.article).then((data) => {
+      await axios.post('http://192.168.214.52/board', this.article).then((data) => {
         console.log(data);
       });
       let type = localStorage.getItem('registType');

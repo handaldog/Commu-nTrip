@@ -80,13 +80,13 @@ export default {
     ...mapState(userStore, ['userInfo']),
   },
   created() {
-    axios.get('http://localhost/board/' + localStorage.getItem('modibno')).then((resp) => {
+    axios.get('http://192.168.214.52/board/' + localStorage.getItem('modibno')).then((resp) => {
       this.article = resp.data;
     });
   },
   methods: {
     async onSubmit() {
-      await axios.put('http://localhost/board', this.article).then((data) => {
+      await axios.put('http://192.168.214.52/board', this.article).then((data) => {
         console.log(data);
       });
 

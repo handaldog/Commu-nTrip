@@ -1,7 +1,6 @@
 <template>
   <div row row-col-lg-4 row-col-md-6>
-
- <div class="border recom rounded"  >실시간 여행지 TOP5</div>
+    <div class="border recom rounded">실시간 여행지 TOP5</div>
     <b-card-group deck style="justify-content: center">
       <!-- 카드 -->
       <b-card
@@ -41,7 +40,7 @@ export default {
     };
   },
   created() {
-    axios.get('http://localhost/trip/toplist').then((resp) => {
+    axios.get('http://192.168.214.52/trip/toplist').then((resp) => {
       this.lists = resp.data;
       console.log(this.lists);
       // console.log(this.lists[0].title);
@@ -64,9 +63,9 @@ export default {
   display: inline-block;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding : 5px;
+  padding: 5px;
   background-color: white;
-  color:  #a5e289;
+  color: #a5e289;
   border-color: #a5e289;
 }
 </style>

@@ -91,7 +91,7 @@ export default {
   },
   created() {
     let cid = localStorage.getItem('content_id');
-    axios.get('http://localhost/trip/comment/' + cid).then((resp) => {
+    axios.get('http://192.168.214.52/trip/comment/' + cid).then((resp) => {
       this.comments = resp.data;
     });
 
@@ -109,7 +109,7 @@ export default {
     this.comment.content_id = cid;
 
     axios
-      .get(`http://localhost/trip/detail?content_id=${cid}`)
+      .get(`http://192.168.214.52/trip/detail?content_id=${cid}`)
       .then((resp) => {
         console.log(resp.data);
         this.tripdetail = resp.data;
@@ -136,9 +136,7 @@ export default {
       ///* global kakao */
       script.onload = () => window.kakao.maps.load(this.loadMap);
       script.src =
-        'http://dapi.kakao.com/v2/maps/sdk.js?appkey=' +
-        process.env.VUE_APP_KAKAO_MAP_API_KEY +
-        '&autoload=false';
+        'http://dapi.kakao.com/v2/maps/sdk.js?appkey=' + process.env.VUE_APP_KAKAO_MAP_API_KEY + '&autoload=false';
 
       document.head.appendChild(script);
     },
@@ -153,10 +151,7 @@ export default {
       this.map = new window.kakao.maps.Map(container, options);
 
       //   this.loadMaker();
-      var makerPosition = new window.kakao.maps.LatLng(
-        this.tripdetail.latitude,
-        this.tripdetail.longitude
-      );
+      var makerPosition = new window.kakao.maps.LatLng(this.tripdetail.latitude, this.tripdetail.longitude);
 
       // 마커를 생성합니다.
       var marker = new window.kakao.maps.Marker({
@@ -169,7 +164,7 @@ export default {
       event.preventDefault();
 
       if (this.comment.id) {
-        await axios.post('http://localhost/trip/comment', this.comment).then((resp) => {
+        await axios.post('http://192.168.214.52/trip/comment', this.comment).then((resp) => {
           console.log(resp);
         });
 

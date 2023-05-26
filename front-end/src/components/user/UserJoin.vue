@@ -107,7 +107,7 @@ export default {
       } else if (!this.isIdCheck) {
         alert('아이디 중복 검사를 해주세요!');
       } else {
-        axios.post('http://localhost/user/join', this.user).then((data) => {
+        axios.post('http://192.168.214.52/user/join', this.user).then((data) => {
           console.log(data);
           localStorage.setItem('preferCheck', this.user.id);
           this.$router.push({ name: 'prefer' });
@@ -116,7 +116,7 @@ export default {
     },
 
     idCheck() {
-      axios.post('http://localhost/user/check', this.user).then((resp) => {
+      axios.post('http://192.168.214.52/user/check', this.user).then((resp) => {
         console.log(resp.data);
         if (resp.data == 0) {
           this.isIdCheck = true;

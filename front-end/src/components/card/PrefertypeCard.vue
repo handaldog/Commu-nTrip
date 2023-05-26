@@ -1,7 +1,6 @@
 <template>
   <div row row-col-lg-4 row-col-md-6>
-
- <div class="border recom rounded"  >{{ userInfo.type }} 타입에게 어울리는 여행지 추천</div>
+    <div class="border recom rounded">{{ userInfo.type }} 타입에게 어울리는 여행지 추천</div>
 
     <b-card-group deck style="justify-content: center">
       <!-- 카드 -->
@@ -56,7 +55,7 @@ export default {
   watch: {},
   created() {
     console.log(this.userInfo.type);
-    axios.get('http://localhost/user/type/' + this.userInfo.type).then((resp) => {
+    axios.get('http://192.168.214.52/user/type/' + this.userInfo.type).then((resp) => {
       console.log(resp.data);
       this.preferlists = resp.data;
       console.log(this.preferlists);
@@ -66,7 +65,7 @@ export default {
   methods: {
     movetripdetail(title) {
       console.log(title);
-      axios.get('http://localhost/trip/preferdetail/' + title).then((resp) => {
+      axios.get('http://192.168.214.52/trip/preferdetail/' + title).then((resp) => {
         console.log(resp.data);
         localStorage.setItem('content_id', resp.data);
         this.$router.push({ name: 'tripdetail' });
@@ -83,7 +82,7 @@ export default {
   display: inline-block;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding : 5px;
+  padding: 5px;
   background-color: #a5e289;
   color: white;
   border-color: #a5e289;

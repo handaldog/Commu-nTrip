@@ -48,16 +48,16 @@ export default {
   },
   created() {
     console.log(this.userInfo);
-    axios.get(`http://localhost/jjim/list?id=${this.userInfo.id}`).then((resp) => {
+    axios.get(`http://192.168.214.52/jjim/list?id=${this.userInfo.id}`).then((resp) => {
       console.log(resp.data);
       this.jjimlists = resp.data;
     });
   },
   methods: {
     async jjimDelete(jno) {
-      await axios.delete('http://localhost/jjim/' + jno);
+      await axios.delete('http://192.168.214.52/jjim/' + jno);
 
-      axios.get(`http://localhost/jjim/list?id=${this.userInfo.id}`).then((resp) => {
+      axios.get(`http://192.168.214.52/jjim/list?id=${this.userInfo.id}`).then((resp) => {
         console.log(resp.data);
         this.jjimlists = resp.data;
       });

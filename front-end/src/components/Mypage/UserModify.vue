@@ -48,7 +48,9 @@
             <b-form-select v-model="user.local" :options="options"></b-form-select>
           </b-form-group>
         </b-form>
-    <b-button class="m-3" style="background-color: #a5e289; border-color: #a5e289" @click="onSubmit">수정하기</b-button>
+        <b-button class="m-3" style="background-color: #a5e289; border-color: #a5e289" @click="onSubmit"
+          >수정하기</b-button
+        >
         <!-- <b-button variant="primary" @click="onSubmit">수정하기</b-button> -->
       </b-col>
     </b-row>
@@ -65,7 +67,6 @@ const userStore = 'userStore';
 export default {
   data() {
     return {
-
       options: [
         { value: '서울', text: '서울' },
         { value: '대전', text: '대전' },
@@ -101,13 +102,13 @@ export default {
     onSubmit() {
       //  const password = prompt('비밀번호를 입력하세요.');
       //  this.user.pw = password;
-      console.log(this.user)
+      console.log(this.user);
       axios
-        .put(`http://localhost/user`, this.user)
+        .put(`http://192.168.214.52/user`, this.user)
         .then((response) => {
           console.log(response);
           alert('수정이 완료되었습니다.');
-          this.$router.push({name : "userinfo"})
+          this.$router.push({ name: 'userinfo' });
         })
         .catch((error) => {
           console.log(error);

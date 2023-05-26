@@ -151,12 +151,12 @@ export default {
     this.trade.bno = localStorage.getItem('viewbno');
 
     let param = localStorage.getItem('viewbno');
-    axios.get('http://localhost/board/' + param).then((resp) => {
+    axios.get('http://192.168.214.52/board/' + param).then((resp) => {
       this.article = resp.data;
       console.log(this.article);
     });
 
-    axios.get('http://localhost/board/comment/' + param).then((resp) => {
+    axios.get('http://192.168.214.52/board/comment/' + param).then((resp) => {
       this.comments = resp.data;
     });
 
@@ -179,7 +179,7 @@ export default {
     },
     async deleteArticle() {
       if (confirm('정말로 삭제합니까?')) {
-        await axios.delete('http://localhost/board/' + localStorage.getItem('viewbno')).then((resp) => {
+        await axios.delete('http://192.168.214.52/board/' + localStorage.getItem('viewbno')).then((resp) => {
           console.log(resp);
         });
         this.moveList();
@@ -192,7 +192,7 @@ export default {
       // });
     },
     deleteComment(cno) {
-      axios.delete('http://localhost/board/comment/' + cno).then((resp) => {
+      axios.delete('http://192.168.214.52/board/comment/' + cno).then((resp) => {
         console.log(resp);
         this.$router.go(0);
       });
@@ -211,7 +211,7 @@ export default {
     async registComment(event) {
       event.preventDefault();
 
-      await axios.post('http://localhost/board/comment', this.comment).then((resp) => {
+      await axios.post('http://192.168.214.52/board/comment', this.comment).then((resp) => {
         console.log(resp.data);
       });
 
@@ -225,7 +225,7 @@ export default {
       this.trade.writer = this.article.writer;
       this.trade.type = this.article.boardType;
 
-      axios.post('http://localhost/board/alert', this.trade).then((resp) => {
+      axios.post('http://192.168.214.52/board/alert', this.trade).then((resp) => {
         console.log(resp.data);
       });
 
