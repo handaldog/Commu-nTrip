@@ -1,5 +1,5 @@
 # 👒 <span style="background-color:#C0FFFF"> Commu'nTrip </span> 
-[Imgur](https://i.imgur.com/m3318sT.png)
+![Imgur](https://i.imgur.com/m3318sT.png)
 
 ---
 ### 0️⃣ 주제
